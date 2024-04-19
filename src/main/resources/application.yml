@@ -8,3 +8,6 @@ spring:
       on-profile: local
     import:
       - classpath:secrets_be/jwt-local.yml
+  redis:
+    host: localhost
+    port: 6379
