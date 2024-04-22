@@ -31,6 +31,18 @@ jobs:
           java-version: "17"
           cache: "gradle"
 
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          repository: "PANTS-GOORM/secrets_be"
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: "secrets_files"
+
+      - name: Set Secrets YML
+        run: |
+          mkdir -p src/main/resources
+          cp secrets_files/* src/main/resources/secrets_be/
+
       - name: Gradle Caching
         uses: actions/cache@v4
         with:
@@ -42,5 +54,9 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - run: chmod +x gradlew
+      - name: gradle test
+        run:
+          ./gradlew test --scan
       - name: Build with Gradle
-        run: ./gradlew clean build
+        run:
+          ./gradlew clean build

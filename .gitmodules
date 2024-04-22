@@ -1,0 +1,3 @@
+[submodule "src/main/resources/secrets_be"]
+	path = src/main/resources/secrets_be
+	url = git@github.com:PANTS-GOORM/secrets_be.git
