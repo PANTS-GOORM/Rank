@@ -4,8 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class RankLobbyService {
+
+  private final RankRoomRepository rankRoomRepository;
 
   /**
    * 인자로 받은 RankRoomInfo를 DB에 저장하는 함수
@@ -14,7 +19,7 @@ public class RankLobbyService {
    */
   public RankRoom registRankRoom(RankRoom rankRoom) {
 
-    return null;
+    return rankRoomRepository.save(rankRoom);
   }
 
   /**
@@ -24,6 +29,6 @@ public class RankLobbyService {
    */
   public List<RankRoom> getAllRankRooms() {
 
-    return null;
+    return rankRoomRepository.findAll();
   }
 }
