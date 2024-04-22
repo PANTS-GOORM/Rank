@@ -1,0 +1,9 @@
+spring:
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+
+jwt:
+  secretKey: ${JWT_SECRETKEY}
+  access:
+    cookie: AccessToken
