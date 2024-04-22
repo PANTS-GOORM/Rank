@@ -41,8 +41,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+
+
       - run: chmod +x gradlew
-      - name: Build with Gradle
+      - name: gradle test
         run:
           ./gradlew test --scan
+      - name: Build with Gradle
+        run:
           ./gradlew clean build
