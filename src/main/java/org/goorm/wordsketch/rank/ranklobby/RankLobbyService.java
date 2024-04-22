@@ -31,4 +31,15 @@ public class RankLobbyService {
 
     return rankRoomRepository.findAll();
   }
+
+  /**
+   * 주어진 방 이름과 일치하는 RankRoom Entity를 반환하는 함수
+   * 
+   * @param roomName
+   * @return
+   */
+  public RankRoom getRankRoom(String roomName) {
+
+    return null;
+  }
 }
