@@ -39,8 +39,8 @@ public class RankRoomCreateApiTest {
     }
 
     @Nested
-    @DisplayName("When: 올바른 accessToken과 함께 지정한 방 이름으로 생성을 요청하면,")
-    class When_올바른_accessToken과_함께_지정한_방_이름으로_생성을_요청하면 {
+    @DisplayName("When: 올바른 accessToken과 함께 특정 방 이름 생성 요청하면,")
+    class When_올바른_accessToken과_함께_특정_방_이름_생성_요청하면 {
 
       private String accessToken = jwtService.createAccessTokenForTest("test@email.com");
       private String testRoomName = "테스트 방";
@@ -68,8 +68,8 @@ public class RankRoomCreateApiTest {
     }
 
     @Nested
-    @DisplayName("When: accessToken과 함께 지정한 방 이름없이 방 생성을 요청하면,")
-    class When_accessToken과_함께_지정한_방_이름없이_방_생성을_요청하면 {
+    @DisplayName("When: accessToken과 함께 방 이름없이 방 생성 요청하면,")
+    class When_accessToken과_함께_방_이름없이_방_생성_요청하면 {
 
       private String accessToken = jwtService.createAccessTokenForTest("test@email.com");
 
@@ -94,8 +94,8 @@ public class RankRoomCreateApiTest {
     }
 
     @Nested
-    @DisplayName("When: 올바르지 않은 accessToken과 함께 방 생성을 요청하면,")
-    class When_올바르지_않은_accessToken과_함께_방_생성을_요청하면 {
+    @DisplayName("When: 올바르지 않은 accessToken과 함께 방 생성 요청하면,")
+    class When_올바르지_않은_accessToken과_함께_방_생성_요청하면 {
 
       private String accessToken = "InvalidAccessToken";
 
