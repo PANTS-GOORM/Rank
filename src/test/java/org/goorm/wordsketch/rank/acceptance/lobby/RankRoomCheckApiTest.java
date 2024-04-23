@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @RequiredArgsConstructor
 @DisplayName("경쟁 어휘 학습 로비 API 인수테스트")
-public class RankLobbyAPITest {
+public class RankRoomCheckApiTest {
 
   private final WebTestClient webTestClient;
 
@@ -95,9 +95,13 @@ public class RankLobbyAPITest {
       @DisplayName("에러코드 401을 메세지와 함께 반환한다.")
       void 에러코드_401을_메세지와_함께_반환한다() {
 
-        responseSpec
+        String returnedServerResponse = responseSpec
             .expectStatus().isUnauthorized()
-            .expectBody(String.class);
+            .expectBody(String.class)
+            .returnResult()
+            .getResponseBody();
+
+        assertEquals("올바르지 않은 accessToken 입니다.", returnedServerResponse);
       }
     }
 
@@ -114,9 +118,13 @@ public class RankLobbyAPITest {
       @DisplayName("에러코드 400을 메세지와 함께 반환한다.")
       void 에러코드_400을_메세지와_함께_반환한다() {
 
-        responseSpec
+        String returnedServerResponse = responseSpec
             .expectStatus().isBadRequest()
-            .expectBody(String.class);
+            .expectBody(String.class)
+            .returnResult()
+            .getResponseBody();
+
+        assertEquals("요청에 쿠키가 존재하지 않습니다.", returnedServerResponse);
       }
     }
   }
