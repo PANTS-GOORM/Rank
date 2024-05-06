@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RankLobbyService {
@@ -21,6 +23,7 @@ public class RankLobbyService {
    */
   public RankRoom registRankRoom(RankRoom rankRoom) {
 
+    log.info(rankRoom.toString());
     return rankRoomRepository.save(rankRoom);
   }
 

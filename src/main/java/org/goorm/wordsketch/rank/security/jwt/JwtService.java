@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -110,6 +111,36 @@ public class JwtService {
       request.setAttribute("FilterException", responseStatusException);
 
       return Optional.empty();
+
+    } catch (NullPointerException | IllegalArgumentException complexException) {
+
+      // TODO 서버가 사인한 JWT지만 유저 Email값이 존재하지 않을 경우, SNS로 알림 보내기?
+      return Optional.empty();
+    }
+  }
+
+  /**
+   * WebSocket CONNECT 단계에서 accessToken을 검증하는 함수
+   *
+   * @param accessToken
+   * @return JWT가 유효하다면 userEmail을 String 타입으로 반환
+   * @throws ResponseStatusException JWT가 유효하지 않다면 HttpStatus.UNAUTHORIZED 상태로 반환
+   */
+  public Optional<String> validateAccessToken(String accessToken) {
+
+    try {
+
+      Claims claims = Jwts.parser()
+          .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+          .build()
+          .parseSignedClaims(accessToken)
+          .getPayload();
+
+      return Optional.ofNullable(String.valueOf(claims.get(USERNAME_CLAIM)));
+
+    } catch (JwtException jwtException) {
+
+      throw new MessageDeliveryException("올바르지 않은 accessToken 입니다.");
 
     } catch (NullPointerException | IllegalArgumentException complexException) {
 
