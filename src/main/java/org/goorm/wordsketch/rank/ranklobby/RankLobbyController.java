@@ -11,18 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/rank/lobby")
+@RequestMapping("/lobby")
 @RequiredArgsConstructor
 public class RankLobbyController {
 
   private final RankLobbyService rankLobbyService;
 
   @GetMapping()
-  public ResponseEntity<List<RankRoomInfo>> getAllRankRoomInfos(HttpServletRequest request) {
+  public ResponseEntity<List<RankRoomInfo>> getAllRankRoomInfos() {
 
     List<RankRoomInfo> rankRoomInfos = rankLobbyService.getAllRankRooms()
         .stream()
@@ -38,7 +37,6 @@ public class RankLobbyController {
     RankRoom createdRankRoom = rankLobbyService.registRankRoom(RankRoom.builder()
         .roomUUID(UUID.randomUUID().toString())
         .roomName(roomName)
-        .headCount(1)
         .build());
 
     return ResponseEntity.ok(createdRankRoom.getRoomUUID());

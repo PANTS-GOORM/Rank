@@ -45,7 +45,6 @@ public class RankRoomCheckApiTest {
     RankRoom rankRoom = RankRoom.builder()
         .roomUUID(UUID.randomUUID().toString())
         .roomName("테스트 RankRoom")
-        .headCount(1)
         .build();
 
     RankRoom savedRankRoom = rankLobbyService.registRankRoom(rankRoom);

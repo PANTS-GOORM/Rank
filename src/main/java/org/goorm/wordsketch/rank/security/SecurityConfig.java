@@ -46,7 +46,7 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // 모든 URL에 대해 인증 필수 설정
         .authorizeHttpRequests(requests -> requests
-            // .requestMatchers("/error").permitAll()
+            .requestMatchers("/rank-ws").permitAll()
             .anyRequest().authenticated())
         // Cors 설정
         .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()))

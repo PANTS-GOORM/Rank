@@ -17,7 +17,7 @@ public class RankRoomInfo {
 
     this.roomUUID = rankRoom.getRoomUUID();
     this.roomName = rankRoom.getRoomName();
-    this.headCount = rankRoom.getHeadCount();
+    this.headCount = rankRoom.getPlayers().size() - 1;
   }
 
   @Override
